@@ -18,9 +18,15 @@
         "vitest": "^3.2.0",
       },
     },
+    "packages/once-woda": {
+      "name": "@aya-neco/once-woda",
+      "version": "0.1.0",
+    },
   },
   "packages": {
     "@aya-neco/app": ["@aya-neco/app@workspace:apps/app"],
+
+    "@aya-neco/once-woda": ["@aya-neco/once-woda@workspace:packages/once-woda"],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.7", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.29.7", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw=="],
 

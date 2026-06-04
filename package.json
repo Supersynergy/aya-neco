@@ -11,7 +11,7 @@
     "build": "bun --cwd apps/app build",
     "test": "bun --cwd apps/app test",
     "lint": "bun --cwd apps/app lint",
-    "check": "bun --cwd apps/app check"
+    "examples": "node scripts/validate-once-woda-manifest.mjs && mkdir -p data/exports && node scripts/render-example-receipt.mjs > data/exports/demo-receipt.json && node scripts/once-woda-envelope.mjs examples/receipts/common-good.json > data/exports/once-woda-envelope.json",
+    "check": "bun run examples && bun --cwd apps/app check"
   }
 }
-

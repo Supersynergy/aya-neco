@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="560" viewBox="0 0 1280 560" role="img" aria-label="AYA-NECO architecture diagram">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#edf6ef"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#28251f" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="560" rx="18" fill="url(#bg)"/>
+  <text x="64" y="70" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30" font-weight="900" fill="#111412">AYA-NECO architecture</text>
+  <text x="64" y="104" font-family="Avenir Next, Segoe UI, sans-serif" font-size="17" fill="#667064">Every balance comes from an event; every integration consumes receipts or hashes.</text>
+
+  <g font-family="Avenir Next, Segoe UI, sans-serif" font-size="18" font-weight="800">
+    <g transform="translate(64 180)" filter="url(#shadow)">
+      <rect width="180" height="96" rx="10" fill="#111412"/>
+      <text x="90" y="45" text-anchor="middle" fill="#fffdf8">Human</text>
+      <text x="90" y="70" text-anchor="middle" font-size="13" fill="#d9efe5">contribution</text>
+    </g>
+    <g transform="translate(306 180)" filter="url(#shadow)">
+      <rect width="180" height="96" rx="10" fill="#d9efe5" stroke="#19705a"/>
+      <text x="90" y="45" text-anchor="middle" fill="#19705a">React UI</text>
+      <text x="90" y="70" text-anchor="middle" font-size="13" fill="#485045">proof lab</text>
+    </g>
+    <g transform="translate(548 180)" filter="url(#shadow)">
+      <rect width="180" height="96" rx="10" fill="#f2e6cb" stroke="#9b6b1d"/>
+      <text x="90" y="38" text-anchor="middle" fill="#9b6b1d">Domain</text>
+      <text x="90" y="64" text-anchor="middle" font-size="13" fill="#485045">GDD + impact</text>
+    </g>
+    <g transform="translate(790 180)" filter="url(#shadow)">
+      <rect width="180" height="96" rx="10" fill="#d9e9f1" stroke="#205c7a"/>
+      <text x="90" y="38" text-anchor="middle" fill="#205c7a">Ledger</text>
+      <text x="90" y="64" text-anchor="middle" font-size="13" fill="#485045">event hashes</text>
+    </g>
+    <g transform="translate(1032 180)" filter="url(#shadow)">
+      <rect width="180" height="96" rx="10" fill="#fffdf8" stroke="#d9d3c8"/>
+      <text x="90" y="38" text-anchor="middle" fill="#111412">Receipt</text>
+      <text x="90" y="64" text-anchor="middle" font-size="13" fill="#485045">JSON export</text>
+    </g>
+  </g>
+
+  <g stroke="#19705a" stroke-width="4" stroke-linecap="round" fill="none">
+    <path d="M250 228h48"/>
+    <path d="M492 228h48"/>
+    <path d="M734 228h48"/>
+    <path d="M976 228h48"/>
+  </g>
+  <g fill="#19705a">
+    <path d="M298 228l-12-7v14z"/>
+    <path d="M540 228l-12-7v14z"/>
+    <path d="M782 228l-12-7v14z"/>
+    <path d="M1024 228l-12-7v14z"/>
+  </g>
+
+  <g transform="translate(276 380)" font-family="Avenir Next, Segoe UI, sans-serif">
+    <rect width="280" height="86" rx="10" fill="#111412"/>
+    <text x="140" y="36" text-anchor="middle" font-size="18" font-weight="900" fill="#fffdf8">ONCE/WODA</text>
+    <text x="140" y="62" text-anchor="middle" font-size="13" fill="#d9efe5">module envelope</text>
+  </g>
+  <g transform="translate(724 380)" font-family="Avenir Next, Segoe UI, sans-serif">
+    <rect width="280" height="86" rx="10" fill="#111412"/>
+    <text x="140" y="36" text-anchor="middle" font-size="18" font-weight="900" fill="#fffdf8">IOTA</text>
+    <text x="140" y="62" text-anchor="middle" font-size="13" fill="#d9efe5">hash notarization</text>
+  </g>
+  <g stroke="#205c7a" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round" fill="none">
+    <path d="M1122 276C1060 350 940 360 864 380"/>
+    <path d="M1122 276C930 350 590 350 416 380"/>
+  </g>
+</svg>
+

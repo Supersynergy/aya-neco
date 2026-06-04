@@ -1,8 +1,7 @@
 export const designSource = {
   system: "UniversalUI local stack",
-  manifest: "/Users/master/BASE/projects/universalui/ui/stack/MANIFEST.tsv",
-  iconSource:
-    "/Users/master/BASE/projects/universalui/ui/stack/icons/lucide/source/icons",
+  manifest: "docs/adr/2026-06-04-universalui-ui-system.md",
+  iconSource: "apps/app/src/assets/icons/lucide",
   posture: "dense trust dashboard",
 } as const;
 
@@ -12,4 +11,3 @@ export const trustLevels = [
   "community-reviewed",
   "expert-mrv-ready",
 ] as const;
-

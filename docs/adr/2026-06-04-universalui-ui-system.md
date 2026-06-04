@@ -7,7 +7,7 @@ Status: Accepted
 
 AYA-NECO needs a credible first UI that proves the value loop without becoming a speculative finance product.
 
-The local UniversalUI stack already caches web UI sources and icon packs under `/Users/master/BASE/projects/universalui/ui/stack`.
+The initial implementation used a local UniversalUI source cache to choose current web UI patterns and icon packs. Selected icons are copied into this repo so users do not need that local cache.
 
 ## Decision
 
@@ -38,4 +38,3 @@ Chosen icons:
 - The app has no runtime icon dependency.
 - The icon choices are auditable and pinned to the local UniversalUI cache.
 - The UI can later migrate to shadcn/ui, Base UI, Radix, Motion, and Number Flow if the prototype needs heavier interaction polish.
-

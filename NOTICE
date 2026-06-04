@@ -1,0 +1,22 @@
+AYA-NECO
+Copyright (c) 2026 Supersynergy
+
+This project includes selected Lucide SVG icons under:
+
+  apps/app/src/assets/icons/lucide
+
+Lucide Icons are licensed under the ISC License.
+
+Copyright (c) 2026 Lucide Icons and Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+Some Lucide icons are derived from Feather, licensed under MIT:
+
+Copyright (c) 2013-present Cole Bemis
+
+See the upstream project for full details:
+
+https://github.com/lucide-icons/lucide

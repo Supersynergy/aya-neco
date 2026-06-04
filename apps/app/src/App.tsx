@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { LedgerTable } from "./components/LedgerTable";
 import { MetricCard } from "./components/MetricCard";
 import { ProofRoute } from "./components/ProofRoute";
+import { UseCaseRail } from "./components/UseCaseRail";
+import { ValueLoopGraphic } from "./components/ValueLoopGraphic";
 import {
   applyMonthlyDecay,
   createLedgerEvent,
@@ -193,15 +195,10 @@ export function App() {
             </p>
           </div>
 
-          <div className="identity-strip" aria-label="Demo identity">
-            <Icon name="fingerprintPattern" size={26} />
-            <div>
-              <strong>aya-demo-user</strong>
-              <small>DID/OIDC/eIDAS placeholders active</small>
-            </div>
-            <span>{designSource.posture}</span>
-          </div>
+          <ValueLoopGraphic />
         </section>
+
+        <UseCaseRail />
 
         <section className="metrics-grid" aria-label="Demo balances">
           <MetricCard
@@ -354,6 +351,10 @@ export function App() {
                 <Icon name="route" size={16} />
                 ONCE manifest slot
               </span>
+              <span>
+                <Icon name="fingerprintPattern" size={16} />
+                {designSource.posture}
+              </span>
             </div>
           </section>
         </section>
@@ -364,4 +365,3 @@ export function App() {
     </div>
   );
 }
-

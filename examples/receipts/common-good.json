@@ -1,0 +1,27 @@
+{
+  "schema": "aya-neco.receipt.v0",
+  "generatedAt": "2026-06-04T00:00:00.000Z",
+  "disclaimer": "Research/demo only. No monetary claim.",
+  "balances": {
+    "gdd": 360,
+    "planedo": 7.5,
+    "auf": 360,
+    "publicBudget": 360,
+    "proofs": 3
+  },
+  "events": [
+    {
+      "id": "common001",
+      "type": "CommonGoodContributionAccepted",
+      "actor": "aya-demo-user",
+      "asset": "GDD_DEMO",
+      "amount": 40,
+      "detail": "2h commons work, community-workshop-note",
+      "trust": "demo-prevalidated",
+      "hash": "5f5a62bb0f6124cbca2a099d3ef17d35ed276287c65562435b91b935d84e1809",
+      "proof": "local-hash",
+      "createdAt": "2026-06-04T00:00:00.000Z"
+    }
+  ]
+}
+

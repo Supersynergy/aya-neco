@@ -1,0 +1,27 @@
+{
+  "schema": "aya-neco.receipt.v0",
+  "generatedAt": "2026-06-04T00:00:00.000Z",
+  "disclaimer": "Research/demo only. No external Planedo validation claim.",
+  "balances": {
+    "gdd": 320,
+    "planedo": 10,
+    "auf": 320,
+    "publicBudget": 320,
+    "proofs": 3
+  },
+  "events": [
+    {
+      "id": "impact001",
+      "type": "ImpactClaimAcceptedDemo",
+      "actor": "aya-demo-user",
+      "asset": "PLANEDO_DEMO",
+      "amount": 2.5,
+      "detail": "25 kg CO2e mapped to demo units",
+      "trust": "demo-prevalidated",
+      "hash": "1db65237c427098cbdd09144fedc01ccf0395d1e2f03caa004f50306cf381ff2",
+      "proof": "local-hash",
+      "createdAt": "2026-06-04T00:00:00.000Z"
+    }
+  ]
+}
+

@@ -8,7 +8,7 @@ AYA-NECO is a local-first prototype. Keep production-value, custody, token-sale,
 
 - Deployable UI lives in `apps/app`.
 - Shared domain logic belongs in `packages/domain` once it outgrows the app slice.
-- Icon choices are sourced from the local UniversalUI cache at `/Users/master/BASE/projects/universalui/ui/stack/icons`.
+- Icon choices are copied into `apps/app/src/assets/icons/lucide` and attributed in `NOTICE`.
 - UI decisions are documented in `docs/adr`.
 
 ## Commands
@@ -21,4 +21,3 @@ AYA-NECO is a local-first prototype. Keep production-value, custody, token-sale,
 ## Design Bar
 
 Use a dense product UI: calm, inspectable, trust-building. Effects must explain state, proof, flow, or completion.
-

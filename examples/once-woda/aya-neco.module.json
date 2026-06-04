@@ -1,0 +1,38 @@
+{
+  "schema": "once.woda.module.v0",
+  "name": "aya.neco.proof-lab",
+  "version": "0.1.0",
+  "summary": "Local-first proof economy module for demo rewards, impact claims, receipts, and proof envelopes.",
+  "runtime": {
+    "kind": "node",
+    "minimum": "22"
+  },
+  "commands": [
+    "aya.issueCommonGood",
+    "aya.createImpactClaim",
+    "aya.applyDecay",
+    "aya.exportReceipt",
+    "aya.wrapReceiptForWoda"
+  ],
+  "inputs": [
+    "ContributionSubmitted",
+    "ImpactClaimSubmitted",
+    "DecayRequested",
+    "ReceiptExportRequested"
+  ],
+  "outputs": [
+    "LedgerEvent",
+    "BalanceProjection",
+    "Receipt",
+    "WodaObjectEnvelope"
+  ],
+  "trust_boundaries": [
+    "demo units only",
+    "no custody",
+    "no official validation claim",
+    "no eIDAS/KYC claim",
+    "no token sale"
+  ],
+  "source": "https://github.com/Supersynergy/aya-neco"
+}
+
