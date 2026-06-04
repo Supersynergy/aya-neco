@@ -1,0 +1,17 @@
+{
+  "name": "aya-neco",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun --cwd apps/app dev --host 127.0.0.1",
+    "build": "bun --cwd apps/app build",
+    "test": "bun --cwd apps/app test",
+    "lint": "bun --cwd apps/app lint",
+    "check": "bun --cwd apps/app check"
+  }
+}
+
