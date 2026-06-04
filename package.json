@@ -7,11 +7,13 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "bun --cwd apps/app dev --host 127.0.0.1",
+    "dev": "bun --cwd apps/api dev & bun --cwd apps/app dev --host 127.0.0.1",
+    "dev:api": "bun --cwd apps/api dev",
+    "dev:app": "bun --cwd apps/app dev --host 127.0.0.1",
     "build": "bun --cwd apps/app build",
-    "test": "bun --cwd apps/app test",
+    "test": "bun test packages/domain/tests apps/api/tests && bun --cwd apps/app test",
     "lint": "bun --cwd apps/app lint",
     "examples": "node scripts/validate-once-woda-manifest.mjs && mkdir -p data/exports && node scripts/render-example-receipt.mjs > data/exports/demo-receipt.json && node scripts/once-woda-envelope.mjs examples/receipts/common-good.json > data/exports/once-woda-envelope.json",
-    "check": "bun run examples && bun --cwd apps/app check"
+    "check": "bun run examples && bun run test && bun run build"
   }
 }

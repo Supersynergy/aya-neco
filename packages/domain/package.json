@@ -1,0 +1,10 @@
+{
+  "name": "@aya-neco/domain",
+  "private": true,
+  "type": "module",
+  "version": "0.2.0",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}
+

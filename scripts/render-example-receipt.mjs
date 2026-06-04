@@ -12,6 +12,13 @@ const event = {
   detail: "2h commons work, community-workshop-note",
   trust: "demo-prevalidated",
   proof: "local-hash",
+  previousHash: "genesis",
+  payload: {
+    hours: 2,
+    cappedHours: 2,
+    evidenceKey: "community-workshop-note",
+    rule: "20_GDD_per_hour_max_50_hours_per_month"
+  },
   createdAt: "2026-06-04T00:00:00.000Z"
 };
 
@@ -19,7 +26,7 @@ event.hash = hash(event);
 event.id = event.hash.slice(0, 10);
 
 const receipt = {
-  schema: "aya-neco.receipt.v0",
+  schema: "aya-neco.receipt.v1",
   generatedAt: "2026-06-04T00:00:00.000Z",
   disclaimer: "Research/demo only. No monetary claim.",
   balances: {
@@ -33,4 +40,3 @@ const receipt = {
 };
 
 console.log(JSON.stringify(receipt, null, 2));
-

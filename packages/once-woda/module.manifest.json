@@ -1,8 +1,8 @@
 {
   "schema": "once.woda.module.v0",
   "name": "aya.neco.proof-lab",
-  "version": "0.1.0",
-  "summary": "Local-first proof economy module for demo rewards, impact claims, receipts, and proof envelopes.",
+  "version": "0.2.0",
+  "summary": "Local-first backend-backed proof economy module for demo rewards, impact claims, receipts, and proof envelopes.",
   "runtime": {
     "kind": "node",
     "minimum": "22"
@@ -48,4 +48,3 @@
   ],
   "source": "https://github.com/Supersynergy/aya-neco"
 }
-

@@ -4,7 +4,7 @@ import {
   createLedgerEvent,
   issueCommonGood,
   planedoFromKg,
-} from "../src/domain/economy";
+} from "@aya-neco/domain";
 
 describe("Gradido-inspired common-good rules", () => {
   it("issues 20 GDD per hour and mirrors public/AUF demo funds", () => {
@@ -46,12 +46,12 @@ describe("ledger proof events", () => {
         detail: "unit test",
         trust: "self-declared",
         proof: "local-hash",
+        previousHash: "genesis",
+        payload: {},
       },
-      "genesis",
     );
 
     expect(event.hash).toHaveLength(64);
     expect(event.id).toHaveLength(10);
   });
 });
-

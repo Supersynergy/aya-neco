@@ -9,7 +9,7 @@ if (!receiptPath) {
 
 const receipt = JSON.parse(readFileSync(receiptPath, "utf8"));
 
-if (receipt.schema !== "aya-neco.receipt.v0") {
+if (receipt.schema !== "aya-neco.receipt.v1") {
   console.error("Unsupported receipt schema.");
   process.exit(1);
 }
@@ -17,7 +17,7 @@ if (receipt.schema !== "aya-neco.receipt.v0") {
 const envelope = {
   woda_schema: "woda.object-envelope.v0",
   module: "aya.neco.proof-lab",
-  module_version: "0.1.0",
+  module_version: "0.2.0",
   kind: "receipt",
   commands: ["aya.exportReceipt", "aya.wrapReceiptForWoda"],
   trust_boundaries: [
@@ -31,4 +31,3 @@ const envelope = {
 };
 
 console.log(JSON.stringify(envelope, null, 2));
-

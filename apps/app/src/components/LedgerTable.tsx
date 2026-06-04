@@ -1,4 +1,4 @@
-import type { LedgerEvent } from "../domain/economy";
+import type { LedgerEvent } from "@aya-neco/domain";
 import { Icon } from "../icons/Icon";
 
 type LedgerTableProps = {
@@ -47,4 +47,3 @@ export function LedgerTable({ events }: LedgerTableProps) {
     </section>
   );
 }
-

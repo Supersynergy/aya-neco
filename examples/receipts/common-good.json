@@ -1,5 +1,5 @@
 {
-  "schema": "aya-neco.receipt.v0",
+  "schema": "aya-neco.receipt.v1",
   "generatedAt": "2026-06-04T00:00:00.000Z",
   "disclaimer": "Research/demo only. No monetary claim.",
   "balances": {
@@ -19,9 +19,15 @@
       "detail": "2h commons work, community-workshop-note",
       "trust": "demo-prevalidated",
       "hash": "5f5a62bb0f6124cbca2a099d3ef17d35ed276287c65562435b91b935d84e1809",
+      "previousHash": "genesis",
       "proof": "local-hash",
+      "payload": {
+        "hours": 2,
+        "cappedHours": 2,
+        "evidenceKey": "community-workshop-note",
+        "rule": "20_GDD_per_hour_max_50_hours_per_month"
+      },
       "createdAt": "2026-06-04T00:00:00.000Z"
     }
   ]
 }
-

@@ -5,9 +5,17 @@
     "": {
       "name": "aya-neco",
     },
+    "apps/api": {
+      "name": "@aya-neco/api",
+      "version": "0.2.0",
+      "dependencies": {
+        "@aya-neco/domain": "workspace:*",
+      },
+    },
     "apps/app": {
       "name": "@aya-neco/app",
       "dependencies": {
+        "@aya-neco/domain": "workspace:*",
         "@types/react": "^19.0.0",
         "@types/react-dom": "^19.0.0",
         "@vitejs/plugin-react": "^5.0.0",
@@ -18,13 +26,21 @@
         "vitest": "^3.2.0",
       },
     },
+    "packages/domain": {
+      "name": "@aya-neco/domain",
+      "version": "0.2.0",
+    },
     "packages/once-woda": {
       "name": "@aya-neco/once-woda",
       "version": "0.1.0",
     },
   },
   "packages": {
+    "@aya-neco/api": ["@aya-neco/api@workspace:apps/api"],
+
     "@aya-neco/app": ["@aya-neco/app@workspace:apps/app"],
+
+    "@aya-neco/domain": ["@aya-neco/domain@workspace:packages/domain"],
 
     "@aya-neco/once-woda": ["@aya-neco/once-woda@workspace:packages/once-woda"],
 

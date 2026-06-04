@@ -4,13 +4,15 @@ AYA-NECO should enter ONCE/WODA as a small object/module, not as a large app blo
 
 The rule:
 
-Expose domain commands and receipt envelopes first. Wrap the UI later.
+Expose API-backed domain commands and receipt envelopes first. Wrap the UI later.
 
 ## Integration Shape
 
 ```text
-AYA domain command
+AYA API command
+  -> shared domain rule
   -> ledger event
+  -> SQLite event chain
   -> receipt
   -> ONCE/WODA envelope
   -> WODA object/runtime
@@ -20,6 +22,8 @@ AYA domain command
 
 - `packages/once-woda/module.manifest.json`
 - `packages/once-woda/adapter-contract.md`
+- `apps/api/src/http.ts`
+- `packages/domain/src/index.ts`
 - `examples/once-woda/aya-neco.module.json`
 - `scripts/validate-once-woda-manifest.mjs`
 - `scripts/once-woda-envelope.mjs`
@@ -59,14 +63,15 @@ Output shape:
 
 ## Step 3: Mount Commands
 
-Map these AYA commands into WODA:
+Map these AYA commands into WODA through the API/domain boundary:
 
 | Command | Input | Output |
 |---|---|---|
-| `aya.issueCommonGood` | hours, evidence key, actor | ledger event |
-| `aya.createImpactClaim` | kg CO2e, method, evidence key | ledger event |
-| `aya.applyDecay` | balance, rate, period | ledger event |
-| `aya.exportReceipt` | event list, balances | receipt |
+| `aya.issueCommonGood` | hours, evidence key, actor | persisted ledger events |
+| `aya.createImpactClaim` | kg CO2e, method, evidence key | persisted ledger event |
+| `aya.applyDecay` | actor | persisted ledger event |
+| `aya.prepareIotaProof` | latest hash | persisted proof-prep event |
+| `aya.exportReceipt` | stored event list | receipt |
 | `aya.wrapReceiptForWoda` | receipt | WODA envelope |
 
 ## Step 4: Keep Trust Boundaries Explicit
@@ -96,4 +101,3 @@ The clean path:
 5. Let WODA envelope carry both local hash and IOTA proof id.
 
 Do not fork IOTA for the first working integration.
-

@@ -1,5 +1,5 @@
 {
-  "schema": "aya-neco.receipt.v0",
+  "schema": "aya-neco.receipt.v1",
   "generatedAt": "2026-06-04T00:00:00.000Z",
   "disclaimer": "Research/demo only. No external Planedo validation claim.",
   "balances": {
@@ -19,9 +19,15 @@
       "detail": "25 kg CO2e mapped to demo units",
       "trust": "demo-prevalidated",
       "hash": "1db65237c427098cbdd09144fedc01ccf0395d1e2f03caa004f50306cf381ff2",
+      "previousHash": "genesis",
       "proof": "local-hash",
+      "payload": {
+        "kgCo2e": 25,
+        "planedoUnits": 2.5,
+        "evidenceKey": "garden-compost-note",
+        "rule": "10_kg_CO2e_per_PLANEDO_DEMO"
+      },
       "createdAt": "2026-06-04T00:00:00.000Z"
     }
   ]
 }
-

@@ -12,7 +12,7 @@
 
 [Quick start](#quick-start) · [Why](docs/WHY.md) · [Architecture](docs/ARCHITECTURE.md) · [ONCE/WODA](docs/ONCE-WODA-INTEGRATION.md) · [Examples](examples)
 
-AYA-NECO is a local-first open-source prototype for a humane, verifiable value loop. It turns one contribution into one inspectable receipt: Gradido-inspired demo rewards, Planedo-inspired demo impact units, a hash-chain ledger, and adapter boundaries for IOTA and ONCE/WODA.
+AYA-NECO is a local-first open-source prototype for a humane, verifiable value loop. It turns one contribution into one inspectable receipt: Gradido-inspired demo rewards, Planedo-inspired demo impact units, a SQLite-backed hash-chain ledger, and adapter boundaries for IOTA and ONCE/WODA.
 
 This is a research/demo app. It is not money, not a token sale, not a custody wallet, and not an official Gradido, Planedo, IOTA, or ONCE product.
 
@@ -24,6 +24,7 @@ This is a research/demo app. It is not money, not a token sale, not a custody wa
 | Common good | `20 GDD_DEMO/hour`, capped at 50 hours/month | Makes Gradido-style issuance visible and testable. |
 | Impact | `10 kg CO2e = 1 PLANEDO_DEMO` | Shows how MRV-style impact records can enter the same ledger. |
 | Ledger | SHA-256 event hash chain | Every balance is explainable from events. |
+| Backend | Bun HTTP API + SQLite | The UI is no longer the source of truth. |
 | Receipts | JSON export from the UI and scripts | Developers can reuse the output immediately. |
 | ONCE/WODA | Module manifest plus envelope bridge | Gives WODA a concrete object/module boundary. |
 | IOTA | Adapter slot documented and proof-ready | Starts with local proof, then adds testnet notarization. |
@@ -46,11 +47,13 @@ http://127.0.0.1:5173/
 
 Expected result:
 
-- a dashboard with demo identity, balances, contribution controls, impact controls, proof route, and ledger;
+- a dashboard with demo identity, backend health, balances, contribution controls, impact controls, proof route, and ledger;
 - clicking `Accept contribution` creates a `CommonGoodContributionAccepted` event;
+- the backend also creates public-budget and AUF mirror events;
 - clicking `Create impact proof` creates a `PLANEDO_DEMO` event;
 - clicking `Advance one month` applies Gradido-style monthly transience;
 - clicking `Export JSON receipt` downloads a reusable receipt.
+- clicking `Export WODA envelope` downloads an ONCE/WODA-ready envelope.
 
 ## Working Examples
 
@@ -77,7 +80,7 @@ Static examples live in:
 | Environmental impact receipt | `Environmental impact` flow | Attach real MRV evidence and validator roles. |
 | IOTA notarization demo | `LedgerEvent.hash` | Submit hashes to IOTA testnet or Notarization Alpha. |
 | ONCE/WODA module | `packages/once-woda/module.manifest.json` | Mount the commands as WODA callable objects. |
-| Policy sandbox | `apps/app/src/domain/economy.ts` | Change issuance, caps, trust levels, and decay rules. |
+| Policy sandbox | `packages/domain/src/index.ts` | Change issuance, caps, trust levels, and decay rules. |
 | Partner demo | `docs/assets/social-preview.png` and screenshots | Use the README plus `docs/WHY.md` for explanation. |
 
 ## Architecture
@@ -89,7 +92,9 @@ Static examples live in:
 ```mermaid
 flowchart LR
   User[Human contribution] --> App[React proof lab]
-  App --> Domain[Gradido and Planedo rules]
+  App --> API[Bun HTTP API]
+  API --> Domain[Gradido and Planedo rules]
+  API --> SQLite[(SQLite ledger)]
   Domain --> Ledger[Append-only event ledger]
   Ledger --> Receipt[JSON receipt]
   Ledger --> IOTA[IOTA proof adapter]
@@ -131,8 +136,8 @@ Selected Lucide icons are copied into `apps/app/src/assets/icons/lucide` so the 
 
 ```bash
 just setup            # install dependencies
-just dev              # run the app
-just test             # run domain tests
+just dev              # run API + app
+just test             # run domain, API, and app tests
 just build            # typecheck and build
 just examples         # generate demo receipt and ONCE/WODA envelope
 just check            # examples + tests + build
@@ -143,6 +148,9 @@ just release-check    # structure + check + asset gate
 
 | Variable | Required | Default | Purpose |
 |---|---:|---|---|
+| `PORT` | no | `8787` | Backend API port. |
+| `AYA_NECO_DB` | no | `data/aya-neco.sqlite` | SQLite DB path relative to `apps/api`. |
+| `VITE_API_BASE_URL` | no | `http://127.0.0.1:8787` | Frontend API target. |
 | `VITE_ENABLE_IOTA_PROOF` | no | `false` | Keeps IOTA proof disabled until configured. |
 | `VITE_IOTA_RPC_URL` | no | empty | Future IOTA RPC/testnet endpoint. |
 | `VITE_IOTA_EXPLORER_URL` | no | `https://explorer.iota.org` | Future proof link base. |

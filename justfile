@@ -4,10 +4,10 @@ setup:
   bun install
 
 dev:
-  bun --cwd apps/app dev --host 127.0.0.1
+  trap 'kill 0' EXIT; bun --cwd apps/api dev & bun --cwd apps/app dev --host 127.0.0.1
 
 test:
-  bun --cwd apps/app test
+  bun run test
 
 lint:
   bun --cwd apps/app lint
@@ -26,7 +26,9 @@ preview:
 
 check-structure:
   test -d apps/app/src
+  test -d apps/api/src
   test -d packages/domain
+  test -d packages/domain/src
   test -d packages/icons
   test -d docs/adr
 
@@ -36,3 +38,4 @@ release-check: check-structure check
   test -f NOTICE
   test -f docs/assets/social-preview.png
   test -f docs/ONCE-WODA-INTEGRATION.md
+  test -f packages/once-woda/module.manifest.json

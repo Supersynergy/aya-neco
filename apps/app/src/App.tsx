@@ -1,53 +1,37 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import {
+  acceptCommonGood,
+  applyDecay,
+  createImpactClaim,
+  getHealth,
+  getReceipt,
+  getState,
+  getWodaEnvelope,
+  prepareIotaProof,
+  resetDemo,
+  type ApiState,
+} from "./api/client";
 import { LedgerTable } from "./components/LedgerTable";
 import { MetricCard } from "./components/MetricCard";
 import { ProofRoute } from "./components/ProofRoute";
 import { UseCaseRail } from "./components/UseCaseRail";
 import { ValueLoopGraphic } from "./components/ValueLoopGraphic";
 import {
-  applyMonthlyDecay,
-  createLedgerEvent,
-  exportReceipt,
   issueCommonGood,
   planedoFromKg,
   type Balances,
   type LedgerEvent,
-} from "./domain/economy";
+} from "@aya-neco/domain";
 import { designSource } from "./design/tokens";
 import { Icon } from "./icons/Icon";
 
 const initialBalances: Balances = {
-  gdd: 320,
-  planedo: 7.5,
-  auf: 320,
-  publicBudget: 320,
-  proofs: 2,
+  gdd: 0,
+  planedo: 0,
+  auf: 0,
+  publicBudget: 0,
+  proofs: 0,
 };
-
-const seedEvents: LedgerEvent[] = [
-  {
-    id: "seed-id",
-    type: "DemoIdentityCreated",
-    actor: "aya-demo-user",
-    detail: "Local identity with DID placeholder",
-    trust: "self-declared",
-    proof: "local-hash",
-    hash: "7d01c1fb2b6abf0c45632a59a913a70dbf71c0b169d0326d5b6bd81af9edaf20",
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: "seed-proof",
-    type: "ImpactClaimAcceptedDemo",
-    actor: "aya-demo-user",
-    asset: "PLANEDO_DEMO",
-    amount: 7.5,
-    detail: "75 kg CO2e demo claim",
-    trust: "demo-prevalidated",
-    proof: "local-hash",
-    hash: "a650cdf21a8aa3ef68ecb1a5c54a1f2a3f67031317869c886bd7175e7a69c4c1",
-    createdAt: new Date().toISOString(),
-  },
-];
 
 function formatNumber(value: number, digits = 0) {
   return new Intl.NumberFormat("en-US", {
@@ -60,91 +44,97 @@ export function App() {
   const [hours, setHours] = useState(2);
   const [kgCo2e, setKgCo2e] = useState(25);
   const [evidence, setEvidence] = useState("community-workshop-note");
+  const [apiState, setApiState] = useState<ApiState | null>(null);
   const [balances, setBalances] = useState<Balances>(initialBalances);
-  const [events, setEvents] = useState<LedgerEvent[]>(seedEvents);
+  const [events, setEvents] = useState<LedgerEvent[]>([]);
   const [busy, setBusy] = useState(false);
-
-  const latestHash = events[0]?.hash ?? "genesis";
+  const [backendStatus, setBackendStatus] = useState<"checking" | "online" | "offline">(
+    "checking",
+  );
+  const [lastAction, setLastAction] = useState("Load backend state");
+  const [error, setError] = useState<string | null>(null);
 
   const projectedCommonGood = useMemo(() => issueCommonGood(hours), [hours]);
   const projectedPlanedo = useMemo(() => planedoFromKg(kgCo2e), [kgCo2e]);
 
-  async function appendEvent(input: Parameters<typeof createLedgerEvent>[0]) {
-    const event = await createLedgerEvent(input, latestHash);
-    setEvents((current) => [event, ...current]);
-    return event;
+  useEffect(() => {
+    void reloadBackendState();
+  }, []);
+
+  function applyState(nextState: ApiState, action: string) {
+    setApiState(nextState);
+    setBalances(nextState.balances);
+    setEvents(nextState.events);
+    setBackendStatus("online");
+    setLastAction(action);
+    setError(null);
+  }
+
+  async function runAction(action: string, work: () => Promise<ApiState>) {
+    setBusy(true);
+    setError(null);
+    try {
+      applyState(await work(), action);
+    } catch (caught) {
+      setBackendStatus("offline");
+      setError(caught instanceof Error ? caught.message : "Unknown backend error");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function reloadBackendState() {
+    setBusy(true);
+    setError(null);
+    try {
+      await getHealth();
+      applyState(await getState(), "Backend state loaded");
+    } catch (caught) {
+      setBackendStatus("offline");
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "Backend not reachable. Start it with `just dev`.",
+      );
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function submitCommonGood() {
-    setBusy(true);
-    const issued = issueCommonGood(hours);
-
-    await appendEvent({
-      type: "CommonGoodContributionAccepted",
-      actor: "aya-demo-user",
-      asset: "GDD_DEMO",
-      amount: issued.person,
-      detail: `${issued.cappedHours}h commons work, ${evidence}`,
-      trust: "demo-prevalidated",
-      proof: "local-hash",
+    await runAction("Persisted common-good contribution", () => {
+      return acceptCommonGood({
+        actor: apiState?.identity.id ?? "aya-demo-user",
+        hours,
+        evidenceKey: evidence,
+      });
     });
-
-    setBalances((current) => ({
-      ...current,
-      gdd: current.gdd + issued.person,
-      auf: current.auf + issued.auf,
-      publicBudget: current.publicBudget + issued.publicBudget,
-      proofs: current.proofs + 1,
-    }));
-    setBusy(false);
   }
 
   async function submitImpact() {
-    setBusy(true);
-    const units = planedoFromKg(kgCo2e);
-
-    await appendEvent({
-      type: "ImpactClaimAcceptedDemo",
-      actor: "aya-demo-user",
-      asset: "PLANEDO_DEMO",
-      amount: units,
-      detail: `${kgCo2e} kg CO2e mapped to demo units`,
-      trust: "demo-prevalidated",
-      proof: "local-hash",
+    await runAction("Persisted impact claim", () => {
+      return createImpactClaim({
+        actor: apiState?.identity.id ?? "aya-demo-user",
+        kgCo2e,
+        evidenceKey: evidence,
+      });
     });
-
-    setBalances((current) => ({
-      ...current,
-      planedo: current.planedo + units,
-      proofs: current.proofs + 1,
-    }));
-    setBusy(false);
   }
 
   async function advanceMonth() {
-    setBusy(true);
-    const { decay, nextBalance } = applyMonthlyDecay(balances.gdd);
-
-    await appendEvent({
-      type: "GddDecayApplied",
-      actor: "gradido-engine",
-      asset: "GDD_DEMO",
-      amount: -decay,
-      detail: "Monthly transience simulation at 5.61%",
-      trust: "demo-prevalidated",
-      proof: "local-hash",
-    });
-
-    setBalances((current) => ({
-      ...current,
-      gdd: nextBalance,
-      proofs: current.proofs + 1,
-    }));
-    setBusy(false);
+    await runAction("Persisted monthly decay event", () => applyDecay());
   }
 
-  function downloadReceipt() {
-    const receipt = exportReceipt(events, balances);
+  async function submitIotaProof() {
+    await runAction("Prepared IOTA proof event", () => prepareIotaProof());
+  }
+
+  async function resetBackendDemo() {
+    await runAction("Reset persistent demo ledger", () => resetDemo());
+  }
+
+  async function downloadReceipt() {
+    const receipt = await getReceipt();
     const blob = new Blob([JSON.stringify(receipt, null, 2)], {
       type: "application/json",
     });
@@ -152,6 +142,19 @@ export function App() {
     const anchor = document.createElement("a");
     anchor.href = url;
     anchor.download = "aya-neco-demo-receipt.json";
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
+
+  async function downloadWodaEnvelope() {
+    const envelope = await getWodaEnvelope();
+    const blob = new Blob([JSON.stringify(envelope, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "aya-neco-woda-envelope.json";
     anchor.click();
     URL.revokeObjectURL(url);
   }
@@ -177,7 +180,7 @@ export function App() {
 
         <div className="status-pill">
           <Icon name="shieldCheck" size={16} />
-          Demo only
+          {backendStatus === "online" ? "SQLite API online" : "Backend check"}
         </div>
       </header>
 
@@ -199,6 +202,41 @@ export function App() {
         </section>
 
         <UseCaseRail />
+
+        <section className={`backend-panel backend-${backendStatus}`} aria-label="Backend status">
+          <div>
+            <span>
+              <Icon name="database" size={17} />
+              Backend
+            </span>
+            <strong>{backendStatus}</strong>
+          </div>
+          <div>
+            <span>Last action</span>
+            <strong>{lastAction}</strong>
+          </div>
+          <div>
+            <span>Storage</span>
+            <strong>{apiState?.ledger.storage ?? "not connected"}</strong>
+          </div>
+          <div>
+            <span>Latest hash</span>
+            <strong className="backend-hash">
+              {apiState?.ledger.latestHash.slice(0, 14) ?? "genesis"}
+            </strong>
+          </div>
+          <button className="secondary-button compact-button" onClick={() => void reloadBackendState()} disabled={busy}>
+            Refresh
+          </button>
+        </section>
+
+        {error ? (
+          <section className="error-panel" role="alert">
+            <strong>Backend is not ready</strong>
+            <p>{error}</p>
+            <code>just dev</code>
+          </section>
+        ) : null}
 
         <section className="metrics-grid" aria-label="Demo balances">
           <MetricCard
@@ -337,9 +375,20 @@ export function App() {
               <Icon name="scale" size={18} />
               Advance one month
             </button>
-            <button className="secondary-button" onClick={downloadReceipt}>
+            <button className="secondary-button" onClick={() => void submitIotaProof()} disabled={busy}>
+              <Icon name="network" size={18} />
+              Prepare IOTA proof
+            </button>
+            <button className="secondary-button" onClick={() => void downloadReceipt()}>
               <Icon name="fileCheck" size={18} />
               Export JSON receipt
+            </button>
+            <button className="secondary-button" onClick={() => void downloadWodaEnvelope()}>
+              <Icon name="route" size={18} />
+              Export WODA envelope
+            </button>
+            <button className="secondary-button danger-button" onClick={() => void resetBackendDemo()} disabled={busy}>
+              Reset persistent demo
             </button>
 
             <div className="adapter-readiness">

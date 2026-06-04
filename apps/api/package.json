@@ -1,0 +1,15 @@
+{
+  "name": "@aya-neco/api",
+  "private": true,
+  "type": "module",
+  "version": "0.2.0",
+  "scripts": {
+    "dev": "bun --watch src/main.ts",
+    "start": "bun src/main.ts",
+    "test": "bun test tests"
+  },
+  "dependencies": {
+    "@aya-neco/domain": "workspace:*"
+  }
+}
+

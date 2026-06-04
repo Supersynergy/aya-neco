@@ -6,5 +6,6 @@ dist/
 bun.lockb
 coverage/
 data/exports/
+apps/api/data/
 apps/app/dist/
 apps/app/.vite/
