@@ -13,10 +13,10 @@ import {
 } from "./api/client";
 import { LedgerTable } from "./components/LedgerTable";
 import { MetricCard } from "./components/MetricCard";
+import { ProjectExamples } from "./components/ProjectExamples";
 import { ProofRoute } from "./components/ProofRoute";
 import { ToolRoles } from "./components/ToolRoles";
-import { UseCaseRail } from "./components/UseCaseRail";
-import { ValueLoopGraphic } from "./components/ValueLoopGraphic";
+import { WalletPreview } from "./components/WalletPreview";
 import { eventSummary, eventTitle } from "./copy/events";
 import {
   issueCommonGood,
@@ -173,98 +173,70 @@ export function App() {
           </span>
           <span>
             <strong>AYA-NECO</strong>
-            <small>Proof economy lab</small>
+            <small>Community proof wallet</small>
           </span>
         </a>
 
         <nav aria-label="Primary">
-          <a href="#start">Start</a>
-          <a href="#outcome">Result</a>
-          <a href="#ledger-heading">Proof</a>
+          <a href="#wallet">Wallet</a>
+          <a href="#projects">Projekte</a>
+          <a href="#start">Beitrag</a>
+          <a href="#builders">Technik</a>
         </nav>
 
         <div className="status-pill">
           <Icon name="shieldCheck" size={16} />
-          {backendStatus === "online" ? "SQLite API online" : "Backend check"}
+          {backendStatus === "online" ? "Demo online" : "Backend check"}
         </div>
       </header>
 
       <main id="workbench">
-        <section className="command-band" aria-labelledby="hero-heading">
+        <section id="wallet" className="command-band wallet-hero" aria-labelledby="hero-heading">
           <div className="hero-copy">
             <div className="eyebrow">
-              <Icon name="scanLine" size={16} />
-              Local proof lab
+              <Icon name="wallet" size={16} />
+              Proof wallet / Nachweis-Wallet
             </div>
-            <h1 id="hero-heading">Work goes in. A proof receipt comes out.</h1>
-            <p>
-              AYA-NECO shows how community work can become a demo balance, an
-              impact claim, and an exportable proof without touching real money.
+            <h1 id="hero-heading">
+              Gemeinwohl-Arbeit wird sichtbar.
+              <span>Make useful work visible.</span>
+            </h1>
+            <p className="copy-de">
+              AYA-NECO zeigt, wie Communities Beiträge erfassen, prüfen und als
+              Wallet-Receipt exportieren können.
+            </p>
+            <p className="copy-en">
+              AYA-NECO shows how communities can record, review, and export useful
+              work as wallet receipts.
             </p>
             <div className="hero-actions" aria-label="Primary actions">
               <a className="primary-button hero-button" href="#start">
                 <Icon name="badgeCheck" size={18} />
-                Create first receipt
+                Beitrag erfassen / Log contribution
               </a>
-              <a className="secondary-button hero-button" href="#ledger-heading">
-                <Icon name="database" size={18} />
-                Inspect proof trail
+              <a className="secondary-button hero-button" href="#outcome">
+                <Icon name="fileCheck" size={18} />
+                Receipt ansehen / View receipt
               </a>
             </div>
             <div className="human-note">
               <Icon name="shieldCheck" size={17} />
-              <span>No token. No custody. Just a local, inspectable value-flow demo.</span>
+              <span>
+                Noch kein echtes Geld. Kein Custody. Erst der prüfbare Nachweis.
+                <small>No real money yet. No custody. Proof first.</small>
+              </span>
             </div>
           </div>
 
-          <div className="hero-side">
-            <section className="plain-flow" aria-label="Plain language flow">
-              <strong>First run, in plain words</strong>
-              <ol>
-                <li>
-                  <span>1</span>
-                  <p>You log 2 hours of common-good work.</p>
-                </li>
-                <li>
-                  <span>2</span>
-                  <p>The demo writes 40 GDD plus mirrored public funds.</p>
-                </li>
-                <li>
-                  <span>3</span>
-                  <p>SQLite saves the hash chain and exports the receipt.</p>
-                </li>
-              </ol>
-            </section>
-            <ValueLoopGraphic />
-          </div>
+          <WalletPreview
+            balances={balances}
+            latestHash={latestHash}
+            latestTitle={eventTitle(latestEvent)}
+            proofCount={proofCount}
+          />
         </section>
 
-        <section className={`backend-panel backend-${backendStatus}`} aria-label="Backend status">
-          <div>
-            <span>
-              <Icon name="database" size={17} />
-              System
-            </span>
-            <strong>{backendStatus}</strong>
-          </div>
-          <div>
-            <span>What just happened</span>
-            <strong>{lastAction}</strong>
-          </div>
-          <div>
-            <span>Saved in</span>
-            <strong>{apiState?.ledger.storage ?? "not connected"}</strong>
-          </div>
-          <div>
-            <span>Proof hash</span>
-            <strong className="backend-hash">
-              {latestHash}
-            </strong>
-          </div>
-          <button className="secondary-button compact-button" onClick={() => void reloadBackendState()} disabled={busy}>
-            Refresh
-          </button>
-        </section>
+        <ProjectExamples />
 
         {error ? (
           <section className="error-panel" role="alert">
@@ -277,14 +249,18 @@ export function App() {
         <section id="outcome" className="outcome-section" aria-label="Current demo result">
           <div className="outcome-copy">
             <span className="step-label">Current result</span>
-            <h2>One small demo run already tells the whole story.</h2>
-            <p>
-              Balances are not typed into the UI. They are recalculated from stored
-              events, so the receipt can be checked later.
+            <h2>Ein Wallet für Beiträge, Wirkung und Nachweise.</h2>
+            <p className="copy-de">
+              Menschen sehen nicht zuerst Hashes. Sie sehen ihren Beitrag, den
+              Status, die Wirkung und den exportierbaren Nachweis.
+            </p>
+            <p className="copy-en">
+              People do not see hashes first. They see their contribution, status,
+              impact, and exportable receipt.
             </p>
           </div>
           <div className="latest-proof-card">
-            <span>Latest proof</span>
+            <span>Letzter Nachweis / Latest proof</span>
             <strong>{eventTitle(latestEvent)}</strong>
             <p>{eventSummary(latestEvent)}</p>
             <small>{proofCount} stored events</small>
@@ -296,34 +272,31 @@ export function App() {
             icon="wallet"
             label="GDD demo"
             value={formatNumber(balances.gdd)}
-            caption="Gradido-inspired local balance"
+            caption="Lokale Demo-Balance / Local demo balance"
             tone="green"
           />
           <MetricCard
             icon="leaf"
             label="Planedo demo"
             value={formatNumber(balances.planedo, 1)}
-            caption="10 kg CO2e per demo unit"
+            caption="Impact-Einheiten / Impact units"
             tone="blue"
           />
           <MetricCard
             icon="landmark"
             label="AUF/public"
             value={formatNumber(balances.auf + balances.publicBudget)}
-            caption="Community funds in simulation"
+            caption="Gemeinschaftsfonds / Community funds"
             tone="amber"
           />
           <MetricCard
             icon="fileCheck"
             label="Proofs"
             value={formatNumber(balances.proofs)}
-            caption="Local hash-chain receipts"
+            caption="Receipts im Ledger / Ledger receipts"
             tone="ink"
           />
         </section>
-
-        <UseCaseRail />
-        <ToolRoles />
 
         <section className="control-grid" aria-label="Prototype controls">
           <form
@@ -337,14 +310,14 @@ export function App() {
             <div className="section-title">
               <Icon name="handHeart" />
               <div>
-                <span className="step-label">Start here</span>
-                <h2>Log common-good work</h2>
-                <p>Try the core mechanic: 20 GDD/hour, capped at 50 hours per month.</p>
+                <span className="step-label">Start here / Hier starten</span>
+                <h2>Beitrag erfassen / Log contribution</h2>
+                <p>2 Stunden helfen, prüfen, Receipt erzeugen. Demo-Regel: 20 GDD/hour.</p>
               </div>
             </div>
 
             <label>
-              Hours
+              Stunden / Hours
               <input
                 min="0"
                 max="50"
@@ -354,7 +327,7 @@ export function App() {
               />
             </label>
             <label>
-              Evidence key
+              Belegschlüssel / Evidence key
               <input
                 value={evidence}
                 onChange={(event) => setEvidence(event.target.value)}
@@ -362,13 +335,13 @@ export function App() {
             </label>
 
             <div className="projection">
-              <span>Projected issue</span>
+              <span>Ergebnis / Projected issue</span>
               <strong>{projectedCommonGood.person} GDD</strong>
             </div>
 
             <button className="primary-button" type="submit" disabled={busy}>
               <Icon name="badgeCheck" size={18} />
-              Accept contribution
+              Beitrag bestätigen / Accept contribution
             </button>
           </form>
 
@@ -382,9 +355,9 @@ export function App() {
             <div className="section-title">
               <Icon name="sprout" />
               <div>
-                <span className="step-label">Optional second claim</span>
-                <h2>Environmental impact</h2>
-                <p>Convert a demo CO2e claim into Planedo-style units.</p>
+                <span className="step-label">Impact / Wirkung</span>
+                <h2>Umweltwirkung / Environmental impact</h2>
+                <p>CO2e-Wirkung sichtbar machen, ohne Zertifizierung vorzutäuschen.</p>
               </div>
             </div>
 
@@ -411,13 +384,13 @@ export function App() {
             </div>
 
             <div className="projection">
-              <span>Projected units</span>
+              <span>Einheiten / Projected units</span>
               <strong>{projectedPlanedo.toFixed(2)} P</strong>
             </div>
 
             <button className="primary-button impact-button" type="submit" disabled={busy}>
               <Icon name="leaf" size={18} />
-              Create impact proof
+              Impact-Receipt erzeugen / Create impact proof
             </button>
           </form>
 
@@ -425,15 +398,15 @@ export function App() {
             <div className="section-title">
               <Icon name="zap" />
               <div>
-                <span className="step-label">Proof tools</span>
-                <h2>Export and adapters</h2>
-                <p>Download the receipt or prepare the next integration boundary.</p>
+                <span className="step-label">Receipt / Export</span>
+                <h2>Nachweis teilen / Share proof</h2>
+                <p>Receipt herunterladen oder für WODA/IOTA vorbereiten.</p>
               </div>
             </div>
 
             <button className="secondary-button" onClick={() => void advanceMonth()} disabled={busy}>
               <Icon name="scale" size={18} />
-              Advance one month
+              Monat simulieren / Advance month
             </button>
             <button className="secondary-button" onClick={() => void submitIotaProof()} disabled={busy}>
               <Icon name="network" size={18} />
@@ -441,14 +414,14 @@ export function App() {
             </button>
             <button className="secondary-button" onClick={() => void downloadReceipt()}>
               <Icon name="fileCheck" size={18} />
-              Export JSON receipt
+              JSON Receipt exportieren
             </button>
             <button className="secondary-button" onClick={() => void downloadWodaEnvelope()}>
               <Icon name="route" size={18} />
-              Export WODA envelope
+              WODA Envelope exportieren
             </button>
             <button className="secondary-button danger-button" onClick={() => void resetBackendDemo()} disabled={busy}>
-              Reset persistent demo
+              Demo zurücksetzen / Reset demo
             </button>
 
             <div className="adapter-readiness">
@@ -468,6 +441,34 @@ export function App() {
           </section>
         </section>
 
+        <section id="builders" className={`backend-panel backend-${backendStatus}`} aria-label="Backend status">
+          <div>
+            <span>
+              <Icon name="database" size={17} />
+              System
+            </span>
+            <strong>{backendStatus}</strong>
+          </div>
+          <div>
+            <span>Was passiert ist / Last action</span>
+            <strong>{lastAction}</strong>
+          </div>
+          <div>
+            <span>Gespeichert in / Stored in</span>
+            <strong>{apiState?.ledger.storage ?? "not connected"}</strong>
+          </div>
+          <div>
+            <span>Proof hash</span>
+            <strong className="backend-hash">
+              {latestHash}
+            </strong>
+          </div>
+          <button className="secondary-button compact-button" onClick={() => void reloadBackendState()} disabled={busy}>
+            Refresh
+          </button>
+        </section>
+
+        <ToolRoles />
         <ProofRoute />
         <LedgerTable events={events} />
       </main>

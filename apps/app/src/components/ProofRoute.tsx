@@ -8,38 +8,38 @@ const routeItems: Array<{
 }> = [
   {
     icon: "fingerprintPattern",
-    title: "Identity",
-    body: "Local demo identity now; DID/OIDC/eIDAS later.",
+    title: "Identität / Identity",
+    body: "Lokale Demo-Identität jetzt; DID/OIDC/eIDAS später.",
     status: "local",
   },
   {
     icon: "handHeart",
-    title: "Commons",
-    body: "20 GDD/hour, capped at 50 hours per month.",
+    title: "Beiträge / Commons",
+    body: "20 GDD/Stunde, gedeckelt auf 50 Stunden pro Monat.",
     status: "live",
   },
   {
     icon: "leaf",
-    title: "Impact",
-    body: "10 kg CO2e maps to 1 Planedo demo unit.",
+    title: "Wirkung / Impact",
+    body: "10 kg CO2e werden zu 1 Planedo-Demo-Einheit.",
     status: "live",
   },
   {
     icon: "shieldCheck",
-    title: "Proof",
-    body: "SHA-256 hash chain for every event.",
+    title: "Nachweis / Proof",
+    body: "SHA-256-Hash-Chain für jedes Event.",
     status: "live",
   },
   {
     icon: "network",
     title: "IOTA",
-    body: "Adapter slot for testnet notarization.",
+    body: "Adapter-Slot für spätere Testnet-Notarisierung.",
     status: "ready",
   },
   {
     icon: "route",
     title: "ONCE",
-    body: "Module manifest boundary for WODA wrappers.",
+    body: "Modul-Manifest als Grenze für WODA-Wrapper.",
     status: "ready",
   },
 ];
@@ -51,7 +51,8 @@ export function ProofRoute() {
         <Icon name="route" />
         <div>
           <h2 id="route-heading">Proof route</h2>
-          <p>Small interfaces now, deeper integrations later.</p>
+          <p>Kleine Schnittstellen jetzt, tiefere Integrationen später.</p>
+          <p className="copy-en">Small interfaces now, deeper integrations later.</p>
         </div>
       </div>
 
@@ -68,4 +69,3 @@ export function ProofRoute() {
     </section>
   );
 }
-

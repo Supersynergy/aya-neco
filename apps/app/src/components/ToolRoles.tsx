@@ -8,32 +8,32 @@ const roles: Array<{
 }> = [
   {
     icon: "handHeart",
-    title: "AYA rules",
-    job: "Turns hours, caps, decay, and impact ratios into ledger events.",
-    handoff: "Input becomes typed events, never direct balance edits.",
+    title: "AYA Regeln / AYA rules",
+    job: "Stunden, Limits und Impact-Regeln werden zu Ledger-Events.",
+    handoff: "Inputs become typed events, never direct balance edits.",
   },
   {
     icon: "database",
-    title: "SQLite ledger",
-    job: "Persists every event as an append-only SHA-256 hash chain.",
+    title: "SQLite Ledger",
+    job: "Speichert jedes Event als append-only SHA-256-Hash-Chain.",
     handoff: "Balances, receipts, and adapters replay the stored events.",
   },
   {
     icon: "fileCheck",
     title: "Receipt",
-    job: "Packages balances, events, hashes, and safety disclaimers.",
+    job: "Verpackt Balances, Events, Hashes und Sicherheitsgrenzen.",
     handoff: "The receipt is the audit object people and tools inspect.",
   },
   {
     icon: "route",
-    title: "WODA envelope",
-    job: "Wraps the receipt as a portable ONCE/WODA object boundary.",
+    title: "WODA Envelope",
+    job: "Macht den Receipt als ONCE/WODA-Objekt portabel.",
     handoff: "WODA can route the proof object without owning the app.",
   },
   {
     icon: "network",
-    title: "IOTA slot",
-    job: "Prepares the latest local hash for future testnet notarization.",
+    title: "IOTA Slot",
+    job: "Bereitet den letzten Hash für spätere Testnet-Notarisierung vor.",
     handoff: "IOTA starts from hashes, not demo balances or UI state.",
   },
 ];
@@ -42,12 +42,15 @@ export function ToolRoles() {
   return (
     <section className="tool-roles" aria-labelledby="tool-roles-heading">
       <div className="tool-roles-copy">
-        <span className="step-label">Tool roles</span>
-        <h2 id="tool-roles-heading">Each tool has one narrow job in the proof flow.</h2>
+        <span className="step-label">Technik / For builders</span>
+        <h2 id="tool-roles-heading">Jede Komponente hat eine klare Rolle.</h2>
         <p>
-          The original demo idea stays intact: a contribution becomes visible proof.
-          The new version adds persistence, exports, and adapter boundaries around
-          that idea.
+          Die Wallet-Ansicht bleibt menschlich. Darunter liegen Ledger, Receipts
+          und Adaptergrenzen für Entwickler.
+        </p>
+        <p className="copy-en">
+          The wallet stays human. Ledger, receipts, and adapter boundaries stay
+          available for builders.
         </p>
       </div>
 

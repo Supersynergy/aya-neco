@@ -12,16 +12,17 @@ export function LedgerTable({ events }: LedgerTableProps) {
       <div className="section-title">
         <Icon name="database" />
         <div>
-          <h2 id="ledger-heading">Append-only proof ledger</h2>
-          <p>Every balance shown above is projected from these events.</p>
+          <h2 id="ledger-heading">Append-only Proof Ledger</h2>
+          <p>Jede Balance oben wird aus diesen Events berechnet.</p>
+          <p className="copy-en">Every balance shown above is projected from these events.</p>
         </div>
       </div>
 
       <div className="ledger-table" role="table" aria-label="Ledger events">
         <div className="ledger-row ledger-row-head" role="row">
-          <span role="columnheader">Event</span>
+          <span role="columnheader">Event / Ereignis</span>
           <span role="columnheader">Asset</span>
-          <span role="columnheader">Amount</span>
+          <span role="columnheader">Amount / Betrag</span>
           <span role="columnheader">Trust</span>
           <span role="columnheader">Hash</span>
         </div>

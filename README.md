@@ -4,7 +4,8 @@
 
 # AYA-NECO
 
-> Proof-economy lab for builders who want to test common-good rewards, impact claims, identity, and IOTA-ready proofs in one local app.
+> Gemeinwohl-Wallet für Beiträge, Wirkung und prüfbare Receipts.
+> Community proof wallet for contributions, impact, and verifiable receipts.
 
 [![CI](https://github.com/Supersynergy/aya-neco/actions/workflows/ci.yml/badge.svg)](https://github.com/Supersynergy/aya-neco/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/Supersynergy/aya-neco)](LICENSE)
@@ -12,15 +13,25 @@
 
 [Quick start](#quick-start) · [Workflow](docs/WORKFLOW.md) · [Why](docs/WHY.md) · [Architecture](docs/ARCHITECTURE.md) · [ONCE/WODA](docs/ONCE-WODA-INTEGRATION.md) · [Examples](examples)
 
-AYA-NECO is a local-first open-source prototype for a humane, verifiable value loop. It turns one contribution into one inspectable receipt: Gradido-inspired demo rewards, Planedo-inspired demo impact units, a SQLite-backed hash-chain ledger, and adapter boundaries for IOTA and ONCE/WODA.
+AYA-NECO ist ein lokaler Open-Source-Prototyp für ein Gemeinwohl-Wallet. Es zeigt, wie nützliche Arbeit erfasst, geprüft, als Demo-Balance sichtbar gemacht und als Receipt exportiert werden kann.
 
-This is a research/demo app. It is not money, not a token sale, not a production custody wallet, and not an official Gradido, Planedo, IOTA, or ONCE product.
+AYA-NECO is a local-first open-source prototype for a community proof wallet. It shows how useful work can be recorded, reviewed, shown as a demo balance, and exported as a receipt.
+
+It combines Gradido-inspired demo rewards, Planedo-inspired demo impact units, a SQLite-backed hash-chain ledger, and adapter boundaries for IOTA and ONCE/WODA.
+
+Dies ist eine Forschungs-/Demo-App. Es ist kein echtes Geld, kein Token Sale, kein Production-Custody-Wallet und kein offizielles Gradido-, Planedo-, IOTA- oder ONCE-Produkt.
+
+This is a research/demo app. It is not real money, not a token sale, not a production custody wallet, and not an official Gradido, Planedo, IOTA, or ONCE product.
 
 ## Vision
 
-AYA-NECO exists to make useful work visible, portable, and verifiable.
+AYA-NECO macht nützliche Arbeit sichtbar, portabel und prüfbar.
 
-Today, communities often depend on spreadsheets, screenshots, trust in one admin, or vague impact claims. A person helps at a food project, repairs bikes, organizes a neighborhood workshop, plants trees, or documents CO2e savings. The work is real, but the proof usually disappears.
+AYA-NECO makes useful work visible, portable, and verifiable.
+
+Viele Communities arbeiten heute mit Tabellen, Screenshots, Papierlisten oder Vertrauen in einzelne Admins. Menschen helfen in Küchen, reparieren Geräte, organisieren Workshops, pflanzen Bäume oder dokumentieren CO2e-Einsparungen. Die Arbeit ist real, aber der Nachweis verschwindet oft.
+
+Many communities still rely on spreadsheets, screenshots, paper lists, or trust in one admin. People help in kitchens, repair devices, organize workshops, plant trees, or document CO2e savings. The work is real, but the proof often disappears.
 
 AYA-NECO tests a different path:
 
@@ -28,102 +39,127 @@ AYA-NECO tests a different path:
 useful work -> transparent event -> demo balance -> proof receipt -> wallet view -> portable envelope
 ```
 
-The long-term vision is a common-good wallet that can hold more than money:
+Die langfristige Vision ist ein Gemeinwohl-Wallet, das mehr als Geld zeigen kann:
 
-- contribution history;
-- local demo balances;
-- community review status;
-- impact receipts;
-- proof hashes;
-- portable WODA objects;
-- future IOTA notarization references.
+The long-term vision is a common-good wallet that can show more than money:
 
-The point is not to launch another speculative token. The point is to give people and communities a clean proof layer for work, care, environmental impact, and local value creation.
+- Beitragshistorie / contribution history;
+- lokale Demo-Balances / local demo balances;
+- Community-Prüfstatus / community review status;
+- Impact-Receipts / impact receipts;
+- Proof-Hashes / proof hashes;
+- portable WODA-Objekte / portable WODA objects;
+- spätere IOTA-Notarisierungsreferenzen / future IOTA notarization references.
 
-## What You Can Do With It Now
+Das Ziel ist nicht der nächste spekulative Token. Das Ziel ist ein sauberer Proof-Layer für Arbeit, Fürsorge, ökologische Wirkung und lokale Wertschöpfung.
+
+The point is not another speculative token. The point is a clean proof layer for work, care, environmental impact, and local value creation.
+
+## What You Can Do With It Now / Was Jetzt Schon Geht
+
+Lokal kannst du bereits den kompletten Proof-Loop testen.
 
 Run the app locally and you can already test the full proof loop:
 
-1. Create a demo identity.
-2. Log common-good work, such as `2 hours`.
-3. Issue a demo community balance, such as `40 GDD_DEMO`.
-4. Mirror the same event into public/AUF demo funds.
-5. Add an environmental impact claim, such as `25 kg CO2e`.
-6. Store every action in a SQLite hash-chain ledger.
-7. Inspect the ledger events, trust levels, amounts, and hashes.
-8. Export a JSON receipt.
-9. Export the same receipt as an ONCE/WODA-ready envelope.
-10. Prepare the latest hash for future IOTA testnet notarization.
+1. Demo-Identität erzeugen / create a demo identity.
+2. Gemeinwohl-Arbeit erfassen, z.B. `2 hours` / log common-good work.
+3. Demo-Balance erzeugen, z.B. `40 GDD_DEMO` / issue a demo balance.
+4. Public/AUF-Demo-Funds spiegeln / mirror public and AUF demo funds.
+5. Impact-Claim ergänzen, z.B. `25 kg CO2e` / add an impact claim.
+6. Alles im SQLite-Hash-Chain-Ledger speichern / store everything in SQLite.
+7. Events, Trust-Level, Beträge und Hashes prüfen / inspect events and hashes.
+8. JSON Receipt exportieren / export a JSON receipt.
+9. ONCE/WODA Envelope exportieren / export an ONCE/WODA-ready envelope.
+10. Hash für spätere IOTA-Testnet-Notarisierung vorbereiten / prepare IOTA notarization.
 
-That makes AYA-NECO useful as a working prototype for wallet builders, community organizers, impact projects, local-economy experiments, and partner demos.
+Damit ist AYA-NECO bereits nutzbar als Prototyp für Wallet-Builder, lokale Communities, Impact-Projekte, lokale Ökonomien und Partner-Demos.
 
-## Concrete Examples
+That makes AYA-NECO useful as a prototype for wallet builders, local communities, impact projects, local-economy experiments, and partner demos.
 
-### 1. Community Contribution Wallet
+## Concrete Examples / Konkrete Beispiele
+
+### 1. Community Contribution Wallet / Beitrags-Wallet
+
+Eine lokale Gruppe will Arbeit sichtbar machen, die sonst unsichtbar bleibt.
 
 A local group wants to recognize work that normally stays invisible.
 
 Example:
 
-- Maria helps run a community kitchen for `2 hours`.
-- The app records the contribution.
-- AYA-NECO issues `40 GDD_DEMO`.
-- The ledger also mirrors `40 PUBLIC_DEMO` and `40 AUF_DEMO`.
-- Maria can export a receipt that proves what was recorded.
+- Maria hilft `2 hours` in einer Nachbarschaftsküche / Maria helps in a community kitchen.
+- Die App erfasst den Beitrag / the app records the contribution.
+- AYA-NECO erzeugt `40 GDD_DEMO` / AYA-NECO issues `40 GDD_DEMO`.
+- Das Ledger spiegelt `40 PUBLIC_DEMO` und `40 AUF_DEMO`.
+- Maria exportiert einen Receipt / Maria exports a proof receipt.
+
+Später kann daraus eine echte Community-Wallet-Ansicht werden:
 
 Later, this can become a real community wallet view:
 
-- member identity;
-- contribution timeline;
-- demo balance;
-- community reviewer signatures;
-- receipts that can be shared with partners or local projects.
+- Mitgliederprofil / member identity;
+- Beitragstimeline / contribution timeline;
+- lokale Balance / local balance;
+- Reviewer-Signaturen / reviewer signatures;
+- teilbare Receipts / shareable receipts.
 
-### 2. Environmental Impact Receipt
+### 2. Environmental Impact Receipt / Umwelt-Receipt
 
-A project wants to track climate or ecological benefit without pretending that every claim is already certified.
+Ein Projekt will Klima- oder Umweltwirkung erfassen, ohne so zu tun, als wäre jeder Claim schon zertifiziert.
+
+A project wants to track climate or ecological benefit without pretending every claim is already certified.
 
 Example:
 
+- Ein Reparaturtreff schätzt `25 kg CO2e` vermiedene Emissionen.
 - A repair cafe estimates `25 kg CO2e` avoided.
-- AYA-NECO maps it to `2.5 PLANEDO_DEMO`.
-- The event is stored as `demo-prevalidated`.
-- The receipt keeps the evidence key and hash.
+- AYA-NECO mappt das auf `2.5 PLANEDO_DEMO`.
+- Das Event bleibt ehrlich `demo-prevalidated`.
+- Der Receipt speichert Belegschlüssel und Hash.
+
+Später kann derselbe Flow erweitert werden:
 
 Later, the same flow can add:
 
-- MRV evidence;
-- expert validator signatures;
-- partner registry export;
-- higher trust levels only when validation actually happened.
+- MRV-Belege / MRV evidence;
+- Expertensignaturen / expert validator signatures;
+- Partner-Registry-Export / partner registry export;
+- höhere Trust-Level nur bei echter Prüfung / higher trust only after real validation.
 
-### 3. Wallet For Local Projects
+### 3. Wallet For Local Projects / Wallet Für Lokale Projekte
+
+Ein Stadtteil, DAO, Verein, eine Schule oder NGO kann ein lokales Proof-Wallet testen.
 
 A city district, DAO, cooperative, school, or nonprofit can test a local proof wallet.
 
 Example wallet cards:
 
-| Wallet card | What it shows |
+| Wallet card | What it shows / Was sie zeigt |
 |---|---|
-| My contributions | Hours, task type, evidence, reviewer status. |
+| My contributions | Stunden, Aufgabe, Beleg, Reviewer-Status / hours, task, evidence, reviewer status. |
 | My demo balance | `GDD_DEMO`, `PLANEDO_DEMO`, AUF/public demo funds. |
-| My receipts | Exportable proof objects with hashes. |
-| My impact | CO2e or other impact claims with trust level. |
-| My portability | WODA envelope for moving proof objects into another runtime. |
-| My notarization | Future IOTA proof ids for selected event hashes. |
+| My receipts | Exportierbare Proof-Objekte mit Hashes / exportable proof objects with hashes. |
+| My impact | CO2e- oder andere Impact-Claims mit Trust-Level / impact claims with trust level. |
+| My portability | WODA Envelope für portable Proof-Objekte / WODA envelope for portability. |
+| My notarization | Spätere IOTA-Proof-IDs / future IOTA proof ids. |
 
-This is the practical wallet direction: start with proof and explainability, then add identity, review, signatures, and network anchoring.
+Das ist die praktische Wallet-Richtung: zuerst Proof und Verständlichkeit, dann Identity, Review, Signaturen und Netzwerk-Anker.
 
-### 4. Partner And Investor Demo
+This is the practical wallet direction: proof and explainability first, then identity, review, signatures, and network anchoring.
+
+### 4. Partner And Investor Demo / Partner- Und Investor-Demo
+
+AYA-NECO gibt dir etwas Konkretes zum Zeigen:
 
 AYA-NECO gives you something concrete to show:
 
-- click through a contribution;
-- show the generated demo balance;
-- show the persisted ledger events;
-- export the receipt;
-- export the WODA envelope;
-- explain where IOTA notarization fits later.
+- Beitrag erfassen / click through a contribution;
+- Demo-Balance zeigen / show the generated demo balance;
+- Ledger-Events zeigen / show persisted ledger events;
+- Receipt exportieren / export the receipt;
+- WODA Envelope exportieren / export the WODA envelope;
+- IOTA-Notarisierung als nächsten Schritt erklären / explain later IOTA notarization.
+
+Das ist stärker als ein Slide Deck, weil der Kern im Browser testbar ist.
 
 That is stronger than a slide deck because the core claim is testable in the browser.
 
