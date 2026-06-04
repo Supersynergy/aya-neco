@@ -16,6 +16,7 @@ import { MetricCard } from "./components/MetricCard";
 import { ProofRoute } from "./components/ProofRoute";
 import { UseCaseRail } from "./components/UseCaseRail";
 import { ValueLoopGraphic } from "./components/ValueLoopGraphic";
+import { eventSummary, eventTitle } from "./copy/events";
 import {
   issueCommonGood,
   planedoFromKg,
@@ -56,6 +57,9 @@ export function App() {
 
   const projectedCommonGood = useMemo(() => issueCommonGood(hours), [hours]);
   const projectedPlanedo = useMemo(() => planedoFromKg(kgCo2e), [kgCo2e]);
+  const latestEvent = events[0];
+  const proofCount = apiState?.ledger.eventCount ?? events.length;
+  const latestHash = apiState?.ledger.latestHash.slice(0, 14) ?? "genesis";
 
   useEffect(() => {
     void reloadBackendState();
@@ -173,9 +177,9 @@ export function App() {
         </a>
 
         <nav aria-label="Primary">
-          <a href="#workbench">Workbench</a>
-          <a href="#ledger-heading">Ledger</a>
-          <a href="#route-heading">Adapters</a>
+          <a href="#start">Start</a>
+          <a href="#outcome">Result</a>
+          <a href="#ledger-heading">Proof</a>
         </nav>
 
         <div className="status-pill">
@@ -189,40 +193,71 @@ export function App() {
           <div className="hero-copy">
             <div className="eyebrow">
               <Icon name="scanLine" size={16} />
-              Local-first prototype
+              Local proof lab
             </div>
-            <h1 id="hero-heading">One contribution. One proof. One visible value loop.</h1>
+            <h1 id="hero-heading">Work goes in. A proof receipt comes out.</h1>
             <p>
-              Test Gradido-style commons rewards, Planedo-style impact units,
-              and IOTA-ready proof routing without touching real money.
+              AYA-NECO shows how community work can become a demo balance, an
+              impact claim, and an exportable proof without touching real money.
             </p>
+            <div className="hero-actions" aria-label="Primary actions">
+              <a className="primary-button hero-button" href="#start">
+                <Icon name="badgeCheck" size={18} />
+                Create first receipt
+              </a>
+              <a className="secondary-button hero-button" href="#ledger-heading">
+                <Icon name="database" size={18} />
+                Inspect proof trail
+              </a>
+            </div>
+            <div className="human-note">
+              <Icon name="shieldCheck" size={17} />
+              <span>No token. No custody. Just a local, inspectable value-flow demo.</span>
+            </div>
           </div>
 
-          <ValueLoopGraphic />
+          <div className="hero-side">
+            <section className="plain-flow" aria-label="Plain language flow">
+              <strong>First run, in plain words</strong>
+              <ol>
+                <li>
+                  <span>1</span>
+                  <p>You log 2 hours of common-good work.</p>
+                </li>
+                <li>
+                  <span>2</span>
+                  <p>The demo writes 40 GDD plus mirrored public funds.</p>
+                </li>
+                <li>
+                  <span>3</span>
+                  <p>SQLite saves the hash chain and exports the receipt.</p>
+                </li>
+              </ol>
+            </section>
+            <ValueLoopGraphic />
+          </div>
         </section>
-
-        <UseCaseRail />
 
         <section className={`backend-panel backend-${backendStatus}`} aria-label="Backend status">
           <div>
             <span>
               <Icon name="database" size={17} />
-              Backend
+              System
             </span>
             <strong>{backendStatus}</strong>
           </div>
           <div>
-            <span>Last action</span>
+            <span>What just happened</span>
             <strong>{lastAction}</strong>
           </div>
           <div>
-            <span>Storage</span>
+            <span>Saved in</span>
             <strong>{apiState?.ledger.storage ?? "not connected"}</strong>
           </div>
           <div>
-            <span>Latest hash</span>
+            <span>Proof hash</span>
             <strong className="backend-hash">
-              {apiState?.ledger.latestHash.slice(0, 14) ?? "genesis"}
+              {latestHash}
             </strong>
           </div>
           <button className="secondary-button compact-button" onClick={() => void reloadBackendState()} disabled={busy}>
@@ -237,6 +272,23 @@ export function App() {
             <code>just dev</code>
           </section>
         ) : null}
+
+        <section id="outcome" className="outcome-section" aria-label="Current demo result">
+          <div className="outcome-copy">
+            <span className="step-label">Current result</span>
+            <h2>One small demo run already tells the whole story.</h2>
+            <p>
+              Balances are not typed into the UI. They are recalculated from stored
+              events, so the receipt can be checked later.
+            </p>
+          </div>
+          <div className="latest-proof-card">
+            <span>Latest proof</span>
+            <strong>{eventTitle(latestEvent)}</strong>
+            <p>{eventSummary(latestEvent)}</p>
+            <small>{proofCount} stored events</small>
+          </div>
+        </section>
 
         <section className="metrics-grid" aria-label="Demo balances">
           <MetricCard
@@ -269,9 +321,12 @@ export function App() {
           />
         </section>
 
+        <UseCaseRail />
+
         <section className="control-grid" aria-label="Prototype controls">
           <form
-            className="action-panel"
+            id="start"
+            className="action-panel start-panel"
             onSubmit={(event) => {
               event.preventDefault();
               void submitCommonGood();
@@ -280,8 +335,9 @@ export function App() {
             <div className="section-title">
               <Icon name="handHeart" />
               <div>
-                <h2>Common-good work</h2>
-                <p>20 GDD/hour, capped at 50 hours per month.</p>
+                <span className="step-label">Start here</span>
+                <h2>Log common-good work</h2>
+                <p>Try the core mechanic: 20 GDD/hour, capped at 50 hours per month.</p>
               </div>
             </div>
 
@@ -324,6 +380,7 @@ export function App() {
             <div className="section-title">
               <Icon name="sprout" />
               <div>
+                <span className="step-label">Optional second claim</span>
                 <h2>Environmental impact</h2>
                 <p>Convert a demo CO2e claim into Planedo-style units.</p>
               </div>
@@ -366,8 +423,9 @@ export function App() {
             <div className="section-title">
               <Icon name="zap" />
               <div>
-                <h2>Simulation controls</h2>
-                <p>Stress the model before any real integration.</p>
+                <span className="step-label">Proof tools</span>
+                <h2>Export and adapters</h2>
+                <p>Download the receipt or prepare the next integration boundary.</p>
               </div>
             </div>
 

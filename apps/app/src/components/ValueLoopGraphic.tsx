@@ -6,54 +6,44 @@ const loopNodes: Array<{
   detail: string;
 }> = [
   {
-    icon: "fingerprintPattern",
-    label: "Identity",
-    detail: "demo DID",
-  },
-  {
     icon: "handHeart",
-    label: "Contribution",
-    detail: "commons work",
+    label: "Work",
+    detail: "2 hours logged",
   },
   {
-    icon: "leaf",
-    label: "Impact",
-    detail: "kg CO2e",
+    icon: "wallet",
+    label: "Value",
+    detail: "40 GDD demo",
   },
   {
     icon: "shieldCheck",
     label: "Proof",
-    detail: "hash chain",
+    detail: "saved in SQLite",
   },
   {
-    icon: "network",
-    label: "IOTA",
-    detail: "adapter slot",
-  },
-  {
-    icon: "route",
-    label: "WODA",
-    detail: "object envelope",
+    icon: "fileCheck",
+    label: "Receipt",
+    detail: "JSON or WODA",
   },
 ];
 
 export function ValueLoopGraphic() {
   return (
-    <aside className="value-loop" aria-label="AYA-NECO value loop graphic">
-      <div className="loop-core">
-        <Icon name="fileCheck" size={34} />
-        <strong>Receipt</strong>
-        <span>one exported proof object</span>
-      </div>
-
+    <aside className="value-loop" aria-label="AYA-NECO value loop">
       {loopNodes.map((node, index) => (
         <article className={`loop-node loop-node-${index + 1}`} key={node.label}>
+          <span className="loop-index">{index + 1}</span>
           <Icon name={node.icon} size={20} />
           <strong>{node.label}</strong>
           <span>{node.detail}</span>
         </article>
       ))}
+
+      <div className="loop-receipt">
+        <Icon name="route" size={22} />
+        <strong>One clear proof object</strong>
+        <span>Readable by people, reusable by adapters.</span>
+      </div>
     </aside>
   );
 }
-

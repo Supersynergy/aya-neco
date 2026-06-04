@@ -1,4 +1,5 @@
 import type { LedgerEvent } from "@aya-neco/domain";
+import { eventSummary, eventTitle, eventTypeHint } from "../copy/events";
 import { Icon } from "../icons/Icon";
 
 type LedgerTableProps = {
@@ -28,8 +29,9 @@ export function LedgerTable({ events }: LedgerTableProps) {
         {events.map((event) => (
           <div className="ledger-row" role="row" key={event.id}>
             <span role="cell">
-              <strong>{event.type}</strong>
-              <small>{event.detail}</small>
+              <strong>{eventTitle(event)}</strong>
+              <small>{eventSummary(event)}</small>
+              <em>{eventTypeHint(event)}</em>
             </span>
             <span role="cell">{event.asset ?? "PROOF"}</span>
             <span role="cell">
