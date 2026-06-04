@@ -528,6 +528,80 @@ h1 {
   line-height: 1.35;
 }
 
+.tool-roles {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.4fr);
+  gap: 14px;
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgb(255 253 248 / 96%), rgb(217 233 241 / 58%)),
+    var(--paper-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgb(40 37 31 / 7%);
+}
+
+.tool-roles-copy {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.tool-roles-copy h2 {
+  max-width: 460px;
+  font-size: clamp(1.45rem, 2.6vw, 2.2rem);
+  line-height: 1.05;
+}
+
+.tool-roles-copy p {
+  max-width: 560px;
+  color: var(--ink-500);
+  line-height: 1.5;
+}
+
+.tool-role-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tool-role-grid article {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-height: 214px;
+  padding: 14px;
+  border: 1px solid rgb(17 20 18 / 10%);
+  background: rgb(255 253 248 / 88%);
+  border-radius: 8px;
+}
+
+.tool-role-grid .icon {
+  color: var(--blue);
+}
+
+.tool-role-grid strong {
+  display: block;
+  line-height: 1.15;
+}
+
+.tool-role-grid p {
+  margin-top: 7px;
+  color: var(--ink-650);
+  line-height: 1.4;
+}
+
+.tool-role-grid small {
+  display: block;
+  margin-top: 9px;
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .metric,
 .action-panel,
 .route-section,
@@ -882,14 +956,16 @@ mark {
 @media (max-width: 1120px) {
   .command-band,
   .control-grid,
-  .outcome-section {
+  .outcome-section,
+  .tool-roles {
     grid-template-columns: 1fr;
   }
 
   .metrics-grid,
   .route-grid,
   .use-case-rail,
-  .backend-panel {
+  .backend-panel,
+  .tool-role-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -921,7 +997,8 @@ mark {
   .route-grid,
   .use-case-rail,
   .backend-panel,
-  .value-loop {
+  .value-loop,
+  .tool-role-grid {
     grid-template-columns: 1fr;
   }
 

@@ -10,7 +10,7 @@
 [![License](https://img.shields.io/github/license/Supersynergy/aya-neco)](LICENSE)
 [![Repo](https://img.shields.io/badge/github-Supersynergy%2Faya--neco-111412)](https://github.com/Supersynergy/aya-neco)
 
-[Quick start](#quick-start) · [Why](docs/WHY.md) · [Architecture](docs/ARCHITECTURE.md) · [ONCE/WODA](docs/ONCE-WODA-INTEGRATION.md) · [Examples](examples)
+[Quick start](#quick-start) · [Workflow](docs/WORKFLOW.md) · [Why](docs/WHY.md) · [Architecture](docs/ARCHITECTURE.md) · [ONCE/WODA](docs/ONCE-WODA-INTEGRATION.md) · [Examples](examples)
 
 AYA-NECO is a local-first open-source prototype for a humane, verifiable value loop. It turns one contribution into one inspectable receipt: Gradido-inspired demo rewards, Planedo-inspired demo impact units, a SQLite-backed hash-chain ledger, and adapter boundaries for IOTA and ONCE/WODA.
 
@@ -28,6 +28,20 @@ This is a research/demo app. It is not money, not a token sale, not a custody wa
 | Receipts | JSON export from the UI and scripts | Developers can reuse the output immediately. |
 | ONCE/WODA | Module manifest plus envelope bridge | Gives WODA a concrete object/module boundary. |
 | IOTA | Adapter slot documented and proof-ready | Starts with local proof, then adds testnet notarization. |
+
+## Workflow In One Pass
+
+```text
+user action -> API command -> domain rule -> SQLite hash-chain event
+  -> projected balances -> JSON receipt -> WODA envelope or future IOTA proof
+```
+
+WODA is currently the portable object boundary: AYA-NECO wraps a receipt into a
+`woda.object-envelope.v0` payload with commands and trust boundaries. IOTA is
+currently the notarization boundary: the app prepares local event hashes for a
+future testnet adapter, but does not submit them yet.
+
+Read the full tool map and original-version comparison in [docs/WORKFLOW.md](docs/WORKFLOW.md).
 
 ## Quick Start
 
@@ -168,6 +182,7 @@ just release-check    # structure + check + asset gate
 ## Docs
 
 - [Why this exists](docs/WHY.md)
+- [Workflow and tool roles](docs/WORKFLOW.md)
 - [Use cases](docs/USE-CASES.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [ONCE/WODA integration](docs/ONCE-WODA-INTEGRATION.md)

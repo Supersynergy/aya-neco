@@ -14,6 +14,7 @@ import {
 import { LedgerTable } from "./components/LedgerTable";
 import { MetricCard } from "./components/MetricCard";
 import { ProofRoute } from "./components/ProofRoute";
+import { ToolRoles } from "./components/ToolRoles";
 import { UseCaseRail } from "./components/UseCaseRail";
 import { ValueLoopGraphic } from "./components/ValueLoopGraphic";
 import { eventSummary, eventTitle } from "./copy/events";
@@ -322,6 +323,7 @@ export function App() {
         </section>
 
         <UseCaseRail />
+        <ToolRoles />
 
         <section className="control-grid" aria-label="Prototype controls">
           <form
