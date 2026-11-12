@@ -142,14 +142,24 @@ A city district, DAO, cooperative, school, or nonprofit can test a local proof w
 
 Example wallet cards:
 
-| Wallet card | What it shows / Was sie zeigt |
-|---|---|
-| My contributions | Stunden, Aufgabe, Beleg, Reviewer-Status / hours, task, evidence, reviewer status. |
-| My demo balance | `GDD_DEMO`, `PLANEDO_DEMO`, AUF/public demo funds. |
-| My receipts | Exportierbare Proof-Objekte mit Hashes / exportable proof objects with hashes. |
-| My impact | CO2e- oder andere Impact-Claims mit Trust-Level / impact claims with trust level. |
-| My portability | WODA Envelope für portable Proof-Objekte / WODA envelope for portability. |
-| My notarization | Spätere IOTA-Proof-IDs / future IOTA proof ids. |
+- **My contributions**<br>
+  What it shows / Was sie zeigt: Stunden, Aufgabe, Beleg, Reviewer-Status / hours, task, evidence, reviewer status.
+
+- **My demo balance**<br>
+  What it shows / Was sie zeigt: `GDD_DEMO`, `PLANEDO_DEMO`, AUF/public demo funds.
+
+- **My receipts**<br>
+  What it shows / Was sie zeigt: Exportierbare Proof-Objekte mit Hashes / exportable proof objects with hashes.
+
+- **My impact**<br>
+  What it shows / Was sie zeigt: CO2e- oder andere Impact-Claims mit Trust-Level / impact claims with trust level.
+
+- **My portability**<br>
+  What it shows / Was sie zeigt: WODA Envelope für portable Proof-Objekte / WODA envelope for portability.
+
+- **My notarization**<br>
+  What it shows / Was sie zeigt: Spätere IOTA-Proof-IDs / future IOTA proof ids.
+
 
 Das ist die praktische Wallet-Richtung: zuerst Proof und Verständlichkeit, dann Identity, Review, Signaturen und Netzwerk-Anker.
 
@@ -177,16 +187,43 @@ That is stronger than a slide deck because the core claim is testable in the bro
 
 ## What It Does
 
-| Layer | What works now | Why it matters |
-|---|---|---|
-| Identity | Local demo identity with DID/OIDC/eIDAS placeholders | Lets the model stay identity-ready without pretending to be certified. |
-| Common good | `20 GDD_DEMO/hour`, capped at 50 hours/month | Makes Gradido-style issuance visible and testable. |
-| Impact | `10 kg CO2e = 1 PLANEDO_DEMO` | Shows how MRV-style impact records can enter the same ledger. |
-| Ledger | SHA-256 event hash chain | Every balance is explainable from events. |
-| Backend | Bun HTTP API + SQLite | The UI is no longer the source of truth. |
-| Receipts | JSON export from the UI and scripts | Developers can reuse the output immediately. |
-| ONCE/WODA | Module manifest plus envelope bridge | Gives WODA a concrete object/module boundary. |
-| IOTA | Adapter slot documented and proof-ready | Starts with local proof, then adds testnet notarization. |
+<details>
+<summary><strong>📋 8 Einträge / entries</strong></summary>
+
+- **Identity**<br>
+  What works now: Local demo identity with DID/OIDC/eIDAS placeholders<br>
+  Why it matters: Lets the model stay identity-ready without pretending to be certified.
+
+- **Common good**<br>
+  What works now: `20 GDD_DEMO/hour`, capped at 50 hours/month<br>
+  Why it matters: Makes Gradido-style issuance visible and testable.
+
+- **Impact**<br>
+  What works now: `10 kg CO2e = 1 PLANEDO_DEMO`<br>
+  Why it matters: Shows how MRV-style impact records can enter the same ledger.
+
+- **Ledger**<br>
+  What works now: SHA-256 event hash chain<br>
+  Why it matters: Every balance is explainable from events.
+
+- **Backend**<br>
+  What works now: Bun HTTP API + SQLite<br>
+  Why it matters: The UI is no longer the source of truth.
+
+- **Receipts**<br>
+  What works now: JSON export from the UI and scripts<br>
+  Why it matters: Developers can reuse the output immediately.
+
+- **ONCE/WODA**<br>
+  What works now: Module manifest plus envelope bridge<br>
+  Why it matters: Gives WODA a concrete object/module boundary.
+
+- **IOTA**<br>
+  What works now: Adapter slot documented and proof-ready<br>
+  Why it matters: Starts with local proof, then adds testnet notarization.
+
+</details>
+
 
 ## Workflow In One Pass
 
@@ -247,17 +284,47 @@ Static examples live in:
 
 ## What You Can Build With It
 
-| Use case | Start here | Next step |
-|---|---|---|
-| Community proof wallet | `Common-good work` flow | Replace demo identity with real member identity and a member profile page. |
-| Contribution timeline | `ledger_events` table | Show every accepted action, reviewer, evidence key, and hash. |
-| Local balance wallet | `projectBalances(events)` | Display `GDD_DEMO`, `PLANEDO_DEMO`, AUF, and public funds per person or group. |
-| Community reviewer flow | `trust` levels | Add signatures that move events from `self-declared` to `community-reviewed`. |
-| Environmental impact receipt | `Environmental impact` flow | Attach real MRV evidence and validator roles. |
-| IOTA notarization demo | `LedgerEvent.hash` | Submit selected hashes to IOTA testnet or Notarization Alpha. |
-| ONCE/WODA module | `packages/once-woda/module.manifest.json` | Mount AYA commands as WODA callable objects. |
-| Policy sandbox | `packages/domain/src/index.ts` | Change issuance, caps, trust levels, and decay rules. |
-| Partner demo | `docs/assets/social-preview.png` and screenshots | Use the README plus `docs/WHY.md` for explanation. |
+<details>
+<summary><strong>📋 9 Einträge / entries</strong></summary>
+
+- **Community proof wallet**<br>
+  Start here: `Common-good work` flow<br>
+  Next step: Replace demo identity with real member identity and a member profile page.
+
+- **Contribution timeline**<br>
+  Start here: `ledger_events` table<br>
+  Next step: Show every accepted action, reviewer, evidence key, and hash.
+
+- **Local balance wallet**<br>
+  Start here: `projectBalances(events)`<br>
+  Next step: Display `GDD_DEMO`, `PLANEDO_DEMO`, AUF, and public funds per person or group.
+
+- **Community reviewer flow**<br>
+  Start here: `trust` levels<br>
+  Next step: Add signatures that move events from `self-declared` to `community-reviewed`.
+
+- **Environmental impact receipt**<br>
+  Start here: `Environmental impact` flow<br>
+  Next step: Attach real MRV evidence and validator roles.
+
+- **IOTA notarization demo**<br>
+  Start here: `LedgerEvent.hash`<br>
+  Next step: Submit selected hashes to IOTA testnet or Notarization Alpha.
+
+- **ONCE/WODA module**<br>
+  Start here: `packages/once-woda/module.manifest.json`<br>
+  Next step: Mount AYA commands as WODA callable objects.
+
+- **Policy sandbox**<br>
+  Start here: `packages/domain/src/index.ts`<br>
+  Next step: Change issuance, caps, trust levels, and decay rules.
+
+- **Partner demo**<br>
+  Start here: `docs/assets/social-preview.png` and screenshots<br>
+  Next step: Use the README plus `docs/WHY.md` for explanation.
+
+</details>
+
 
 ## Architecture
 
@@ -304,9 +371,14 @@ Selected Lucide icons are copied into `apps/app/src/assets/icons/lucide` so the 
 
 ## Screenshots
 
-| Desktop | Mobile |
-|---|---|
-| ![Desktop screenshot](data/screenshots/aya-neco-desktop.png) | ![Mobile screenshot](data/screenshots/aya-neco-mobile.png) |
+<details>
+<summary><strong>📋 1 Einträge / entries</strong></summary>
+
+- **![Desktop screenshot](data/screenshots/aya-neco-desktop.png)**<br>
+  Mobile: ![Mobile screenshot](data/screenshots/aya-neco-mobile.png)
+
+</details>
+
 
 ## Commands
 
@@ -322,14 +394,41 @@ just release-check    # structure + check + asset gate
 
 ## Configuration
 
-| Variable | Required | Default | Purpose |
-|---|---:|---|---|
-| `PORT` | no | `8787` | Backend API port. |
-| `AYA_NECO_DB` | no | `data/aya-neco.sqlite` | SQLite DB path relative to `apps/api`. |
-| `VITE_API_BASE_URL` | no | `http://127.0.0.1:8787` | Frontend API target. |
-| `VITE_ENABLE_IOTA_PROOF` | no | `false` | Keeps IOTA proof disabled until configured. |
-| `VITE_IOTA_RPC_URL` | no | empty | Future IOTA RPC/testnet endpoint. |
-| `VITE_IOTA_EXPLORER_URL` | no | `https://explorer.iota.org` | Future proof link base. |
+<details>
+<summary><strong>📋 6 Einträge / entries</strong></summary>
+
+- **`PORT`**<br>
+  Required: no<br>
+  Default: `8787`<br>
+  Purpose: Backend API port.
+
+- **`AYA_NECO_DB`**<br>
+  Required: no<br>
+  Default: `data/aya-neco.sqlite`<br>
+  Purpose: SQLite DB path relative to `apps/api`.
+
+- **`VITE_API_BASE_URL`**<br>
+  Required: no<br>
+  Default: `http://127.0.0.1:8787`<br>
+  Purpose: Frontend API target.
+
+- **`VITE_ENABLE_IOTA_PROOF`**<br>
+  Required: no<br>
+  Default: `false`<br>
+  Purpose: Keeps IOTA proof disabled until configured.
+
+- **`VITE_IOTA_RPC_URL`**<br>
+  Required: no<br>
+  Default: empty<br>
+  Purpose: Future IOTA RPC/testnet endpoint.
+
+- **`VITE_IOTA_EXPLORER_URL`**<br>
+  Required: no<br>
+  Default: `https://explorer.iota.org`<br>
+  Purpose: Future proof link base.
+
+</details>
+
 
 ## Safety Boundaries
 
