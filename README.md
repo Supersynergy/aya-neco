@@ -25,6 +25,9 @@ This is a research/demo app. It is not real money, not a token sale, not a produ
 
 ## Vision
 
+<details>
+<summary>🌱 Vision / Hintergrund</summary>
+
 AYA-NECO macht nützliche Arbeit sichtbar, portabel und prüfbar.
 
 AYA-NECO makes useful work visible, portable, and verifiable.
@@ -55,6 +58,9 @@ Das Ziel ist nicht der nächste spekulative Token. Das Ziel ist ein sauberer Pro
 
 The point is not another speculative token. The point is a clean proof layer for work, care, environmental impact, and local value creation.
 
+
+</details>
+
 ## What You Can Do With It Now / Was Jetzt Schon Geht
 
 Lokal kannst du bereits den kompletten Proof-Loop testen.
@@ -77,6 +83,9 @@ Damit ist AYA-NECO bereits nutzbar als Prototyp für Wallet-Builder, lokale Comm
 That makes AYA-NECO useful as a prototype for wallet builders, local communities, impact projects, local-economy experiments, and partner demos.
 
 ## Concrete Examples / Konkrete Beispiele
+
+<details>
+<summary>🧩 Explore the examples / Beispiele anzeigen</summary>
 
 ### 1. Community Contribution Wallet / Beitrags-Wallet
 
@@ -162,6 +171,9 @@ AYA-NECO gives you something concrete to show:
 Das ist stärker als ein Slide Deck, weil der Kern im Browser testbar ist.
 
 That is stronger than a slide deck because the core claim is testable in the browser.
+
+
+</details>
 
 ## What It Does
 
